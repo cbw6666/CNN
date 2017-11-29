@@ -1,5 +1,6 @@
 import tensorflow as tf
 import numpy as np
+import matplotlib.pyplot as plt
 
 def add_layer(inputs, in_size, out_size, activation_function=None):
     # add one more layer and return the output of this layer
@@ -39,9 +40,25 @@ else:
 sess = tf.Session()
 sess.run(init)
 
+fig = plt.figure()
+ax = fig.add_subplot(1, 1, 1)
+ax.scatter(x_data, y_data)
+plt.ion()    # 使程序不暂停
+plt.show()
+
 for i in range(1000):
     # training
     sess.run(train_step, feed_dict={xs: x_data, ys: y_data})
     if i % 50 == 0:
         # to see the step improvement
-        print(sess.run(loss, feed_dict={xs: x_data, ys: y_data}))
+        # print(sess.run(loss, feed_dict={xs: x_data, ys: y_data}))
+
+        # 绘图
+        try:
+            # 抹除第一条线
+            ax.lines.remove(lines[0])
+        except Exception:
+            pass
+        prediction_val = sess.run(prediction, feed_dict={xs:x_data})
+        lines = ax.plot(x_data, prediction_val, 'r', lw = 5)
+        plt.pause(0.1)
