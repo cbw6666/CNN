@@ -1,3 +1,3 @@
 # CNN
 A simple CNN.
-The code source:http://blog.topspeedsnail.com/archives/10451. I just change it a little.
+这个使在看莫愁Tensorflow视频时的练习代码。详细请看他的GitPages(https://morvanzhou.github.io/)
